@@ -306,26 +306,78 @@
       textarea { width: 100%; min-height: 84px; padding: 11px 13px; border: 1.5px solid var(--line); border-radius: 14px; resize: vertical; }
       textarea:focus { outline: 0; border-color: var(--accent); }
 
-      /* ---------- Ronde (téléphone) ---------- */
-      .phone { max-width: 400px; margin: 0 auto; background: #f2f2f7; border: 10px solid #1d1d1f; border-radius: 48px; padding: 26px 14px 18px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.16); }
-      .phone-h { text-align: center; padding: 2px 8px 12px; }
-      .phone-h small { color: var(--muted); font-size: 12.5px; display: block; }
-      .phone-h b { font-size: 21px; font-weight: 700; letter-spacing: -0.025em; display: block; margin-top: 2px; }
-      .prog { height: 6px; border-radius: 99px; background: #e0e0e6; overflow: hidden; margin: 10px 18px 4px; }
-      .prog span { display: block; height: 100%; background: var(--good); border-radius: 99px; transition: width 0.3s; }
-      .rl { list-style: none; margin: 8px 0 0; padding: 0; }
-      .rl li { border-radius: 16px; padding: 13px; background: #fff; }
-      .rl li + li { margin-top: 8px; }
-      .rl .row { display: flex; gap: 12px; align-items: flex-start; }
-      .ck { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--line-strong); display: grid; place-items: center; flex: none; color: #fff; margin-top: 1px; }
-      .ck .ic { width: 16px; height: 16px; }
-      .done .ck { background: var(--good); border-color: var(--good); }
-      .rl .row b { display: block; font-weight: 600; font-size: 14.5px; line-height: 1.3; }
-      .rl .row small { color: var(--muted); font-size: 12.5px; display: block; margin-top: 2px; }
-      .rl .stamp { font-size: 12.5px; color: var(--good-ink); font-weight: 600; margin-top: 6px; display: flex; align-items: center; gap: 8px; }
-      .rl .stamp img, .rl .stamp .ph { width: 34px; height: 34px; border-radius: 8px; object-fit: cover; background: #dde6ee; }
-      .rl .acts { display: flex; gap: 8px; margin: 10px 0 0 40px; flex-wrap: wrap; }
-      .rl .known { margin: 8px 0 0 40px; font-size: 12.5px; color: var(--warn-ink); background: var(--warn-soft); padding: 7px 10px; border-radius: 10px; }
+      /* ---------- Ronde (téléphone, style iOS) ---------- */
+      .ronde-wrap { display: grid; grid-template-columns: 404px minmax(0, 1fr); gap: 32px; align-items: start; }
+      .rside { position: sticky; top: 24px; }
+      .phone { position: relative; max-width: 404px; margin: 0 auto; background: #f2f2f7; border: 11px solid #1d1d1f; border-radius: 52px; padding: 14px 14px 12px; box-shadow: 0 0 0 1px #3a3a3c, 0 24px 60px rgba(0, 0, 0, 0.18); }
+      .sbar { display: flex; justify-content: space-between; align-items: center; padding: 2px 16px 12px; font-size: 14px; font-weight: 600; }
+      .sb-r { display: flex; align-items: flex-end; gap: 2px; }
+      .sb-r i { width: 3px; background: var(--ink); border-radius: 1px; }
+      .sb-r i:nth-child(1) { height: 5px; } .sb-r i:nth-child(2) { height: 8px; } .sb-r i:nth-child(3) { height: 11px; }
+      .sb-r u { width: 22px; height: 11px; border: 1.5px solid var(--ink); border-radius: 3px; margin-left: 6px; position: relative; }
+      .sb-r u::after { content: ""; position: absolute; inset: 1.5px 5px 1.5px 1.5px; background: var(--ink); border-radius: 1px; }
+      .ph-title { padding: 4px 6px 12px; }
+      .ph-title small { font-size: 13px; color: var(--muted); font-weight: 500; }
+      .ph-title h3 { font-size: 28px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; }
+      .ph-title span { font-size: 14px; color: var(--ink-2); }
+      .ph-done { text-align: center; padding: 6px 10px 14px; }
+      .big-ck { width: 56px; height: 56px; border-radius: 50%; background: var(--good); color: #fff; display: grid; place-items: center; margin: 0 auto 10px; }
+      .big-ck .ic { width: 28px; height: 28px; stroke-width: 2.4; }
+      .ph-done b { display: block; font-size: 22px; font-weight: 700; letter-spacing: -0.025em; }
+      .ph-done small { display: block; color: var(--muted); font-size: 13px; margin-top: 4px; }
+      .segs { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; padding: 0 6px; }
+      .segs i { height: 5px; border-radius: 99px; background: #dcdce2; transition: background 0.25s; }
+      .segs i.ok { background: var(--good); }
+      .segs i.iss { background: var(--warn); }
+      .grp-t { font-size: 12.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; padding: 18px 8px 6px; }
+      .ilist { list-style: none; margin: 0; padding: 0; background: #fff; border-radius: 14px; overflow: hidden; }
+      .irow { display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 12px 12px 14px; position: relative; }
+      .irow + .irow::before { content: ""; position: absolute; top: 0; left: 52px; right: 0; height: 1px; background: var(--line); }
+      .cb { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #c7c7cc; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 14px; transition: background 0.2s, border-color 0.2s; }
+      .cb .ic { width: 15px; height: 15px; stroke-width: 2.6; }
+      .is-done .cb { background: var(--good); border-color: var(--good); }
+      .is-iss .cb { background: var(--warn); border-color: var(--warn); }
+      .ib b { display: block; font-size: 15px; font-weight: 500; line-height: 1.3; letter-spacing: -0.01em; }
+      .is-done .ib b { color: var(--ink-2); }
+      .ib small { display: block; font-size: 12.5px; color: var(--muted); margin-top: 1px; }
+      .stamp { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--good-ink); font-weight: 600; margin-top: 4px; }
+      .stamp.iss { color: var(--warn-ink); }
+      .stamp img { width: 28px; height: 28px; border-radius: 6px; object-fit: cover; }
+      .exlink { font-size: 12px; color: var(--accent-ink); margin-top: 3px; font-weight: 500; }
+      .exlink:hover { text-decoration: underline; }
+      .ir { display: flex; gap: 6px; align-items: center; }
+      .pbtn { position: relative; height: 34px; min-width: 34px; border-radius: 999px; display: inline-grid; place-items: center; font-size: 13.5px; font-weight: 700; cursor: pointer; overflow: hidden; }
+      .pbtn .ic { width: 17px; height: 17px; }
+      .pbtn.ok, .pbtn.txt { background: var(--accent); color: #fff; padding: 0 14px; }
+      .pbtn.cam { background: var(--accent); color: #fff; width: 44px; }
+      .pbtn.cam input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+      .pbtn.cam:focus-within { outline: 3px solid rgba(0, 113, 227, 0.5); outline-offset: 2px; }
+      .pbtn.ghost { background: #f2f2f7; color: var(--muted); }
+      .pbtn.ghost:hover { color: var(--warn); background: var(--warn-soft); }
+      .pbtn:active { transform: scale(0.94); }
+      .known { grid-column: 2 / -1; display: flex; gap: 6px; align-items: flex-start; font-size: 12.5px; color: var(--warn-ink); background: var(--warn-soft); padding: 7px 10px; border-radius: 10px; margin-top: -2px; }
+      .known .ic { width: 14px; height: 14px; margin-top: 2px; }
+      .issue { grid-column: 1 / -1; background: var(--surface-2); border-radius: 12px; padding: 12px; }
+      .issue b { font-size: 13.5px; }
+      .chips { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0; }
+      .chip { padding: 6px 11px; border-radius: 999px; background: #fff; border: 1px solid var(--line-strong); font-size: 13px; }
+      .chip.on { background: var(--warn-soft); border-color: var(--warn); color: var(--warn-ink); font-weight: 600; }
+      .issue textarea { min-height: 60px; background: #fff; margin-bottom: 8px; }
+      .ph-foot { position: sticky; bottom: 12px; padding-top: 16px; }
+      .ph-foot .btn { box-shadow: 0 6px 18px rgba(0, 113, 227, 0.28); }
+      .ph-foot .btn[disabled] { opacity: 1; background: #c7c7cc; border-color: #c7c7cc; box-shadow: none; }
+      .hbar { width: 120px; height: 5px; border-radius: 99px; background: #1d1d1f; margin: 14px auto 0; }
+      .pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px; }
+      .pgrid figure { margin: 0; }
+      .pgrid img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; display: block; }
+      .pgrid figcaption { font-size: 12.5px; font-weight: 600; margin-top: 5px; line-height: 1.25; }
+      .pgrid figcaption small { display: block; color: var(--muted); font-weight: 500; }
+      .hist { list-style: none; margin: 0; padding: 0; }
+      .hist li { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 12px; align-items: center; padding: 9px 0; border-top: 1px solid var(--line); font-size: 13.5px; }
+      .hist li:first-child { border-top: 0; }
+      .hist b { font-weight: 600; }
+      .hist small { display: block; color: var(--muted); font-size: 12.5px; }
+      .hist .hr { text-align: right; font-weight: 500; }
       .camera { position: relative; overflow: hidden; }
       .camera input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
 
@@ -380,7 +432,8 @@
         .cnt { margin-left: 2px; }
         .side-foot { display: none; }
         main { padding: 24px 20px 56px; }
-        .grid2, .grid2e, .charts { grid-template-columns: 1fr; }
+        .grid2, .grid2e, .charts, .ronde-wrap { grid-template-columns: 1fr; }
+        .rside { position: static; }
         .grid2 > div > .card + .card, .grid2 > * + * { margin-top: 0; }
         .measure { grid-template-columns: 1fr 1fr; }
         .brief { grid-template-columns: 1fr 1fr; }
@@ -402,7 +455,9 @@
         .card { padding: 18px; border-radius: 16px; }
         .tw { margin: 0 -18px; padding: 0 18px; overflow: visible; }
         .todo small { white-space: normal; }
-        .phone { border: 0; box-shadow: none; padding: 4px 0; border-radius: 0; background: transparent; }
+        .phone { border: 0; box-shadow: none; padding: 0; border-radius: 0; background: transparent; }
+        .sbar, .hbar { display: none; }
+        .ronde-ph { display: none; }
         .doc { padding: 26px 18px; }
         .doc-top { flex-direction: column; }
         .sign { grid-template-columns: 1fr; }
@@ -833,6 +888,7 @@
 
         // À traiter, regroupé par urgence
         const G = { c: [], w: [], i: [] };
+        RONDE.filter((it) => S.ronde[it.k] && S.ronde[it.k].issue).forEach((it) => G.c.push(["walk", "Ronde : " + S.ronde[it.k].issue, SHORT[it.k] + " · signalé à " + S.ronde[it.k].t + " par Julien R.", "#/ronde", "ce matin"]));
         st.oorPending.forEach((r) => G.c.push(["drop", "Eau hors plage : nouveau contrôle à faire", r.act, "#/eau", "dans l’heure"]));
         lateDefs.forEach((d) => G.c.push(["gear", d.id + " · " + d.txt, instOf(d.inst).name + " · " + d.loc, "#/installation/" + d.inst, whenLabel(d.delai)]));
         st.staffLate.forEach((a) => G.c.push(["people", a.what + " échu : " + a.p.name, a.p.plan || "", "#/equipe", "depuis le " + fmtS(D(a.d))]));
@@ -1120,7 +1176,7 @@
         const i = instOf(d.inst);
         if (firmSent || defState(d) === "preuve" || defState(d) === "corrige")
           return (
-            '<div class="card" style="max-width:560px;margin:0 auto;text-align:center;padding:36px 24px"><div class="ck" style="margin:0 auto;width:44px;height:44px;background:var(--good);border-color:var(--good)">' + ic("check") + '</div><h2 style="margin-top:14px;font-size:21px">Merci, votre preuve est transmise</h2><p class="muted" style="margin-top:6px">La direction de la piscine la vérifie et lève le défaut. Ce lien ne donne accès à rien d’autre.</p>' +
+            '<div class="card" style="max-width:560px;margin:0 auto;text-align:center;padding:36px 24px"><div class="big-ck">' + ic("check") + '</div><h2 style="margin-top:14px;font-size:21px">Merci, votre preuve est transmise</h2><p class="muted" style="margin-top:6px">La direction de la piscine la vérifie et lève le défaut. Ce lien ne donne accès à rien d’autre.</p>' +
             '<p style="margin-top:22px"><a class="lnk" href="#/installation/' + d.inst + '">Revenir à la vue de la piscine (démo) ›</a></p></div>'
           );
         return (
@@ -1164,32 +1220,108 @@
       }
 
       // ---------- Vue : Ronde du matin (téléphone) ----------
+      const RGROUPS = [
+        ["Sécurité des personnes", ["sorties", "sauvetage", "dae", "trousse"]],
+        ["Eau et bassin", ["eau", "bassin"]],
+        ["Technique", ["chimie", "ecl"]],
+      ];
+      const ISSUE_HINTS = {
+        sorties: ["Issue encombrée", "Porte verrouillée"],
+        sauvetage: ["Bouée manquante", "Perche déplacée"],
+        dae: ["Voyant orange", "Électrodes absentes"],
+        trousse: ["Matériel à compléter"],
+        bassin: ["Eau trouble", "Objet au fond"],
+        chimie: ["Odeur de chlore", "Bac de rétention humide"],
+        ecl: ["Bloc éteint"],
+      };
+      let rIssue = null, rIssueTxt = "";
+      // Historique fictif des 7 derniers jours d’ouverture.
+      function rondeHistory() {
+        const r = rng(77), out = [];
+        for (let n = -1; out.length < 7; n--) {
+          const d = rel(n);
+          if (!isOpen(d)) continue;
+          const st = 6 * 60 + 36 + Math.floor(r() * 12), dur = 16 + Math.floor(r() * 9);
+          const t = (m) => pad(Math.floor(m / 60)) + ":" + pad(m % 60);
+          out.push({ d, start: t(st), end: t(st + dur), dur, visa: ["Julien R.", "Sarah K.", "Thomas G.", "Luca B.", "Inès F."][Math.floor(r() * 5)], issue: n === -3 ? "Bouée déplacée, remise en place" : null });
+        }
+        return out;
+      }
+      const toMin = (t) => +t.slice(0, 2) * 60 + +t.slice(3);
       function viewRonde() {
         const rs = rondeState();
-        const pct = Math.round((rs.done / rs.total) * 100);
-        const phImg = (k) => (photos[k] ? '<img alt="Photo" src="' + photos[k] + '"/>' : '<span class="ph" aria-hidden="true"></span>');
-        return (
-          '<div class="page-h"><div><h2>Ronde d’ouverture</h2><p>Chaque matin avant ' + OUVERTURE + ", sur le téléphone du garde-bains. Chaque point est horodaté, les points essentiels avec une photo.</p></div></div>" +
-          '<div class="phone"><div class="phone-h"><small>' + cap(JOURS[TODAY.getDay()]) + " " + fmt(TODAY) + " · Julien R.</small><b>" + (rs.closed ? "Ronde clôturée à " + rs.closed.t : rs.done + " sur " + rs.total + " points") + '</b><div class="prog"><span style="width:' + pct + '%"></span></div></div>' +
-          '<ul class="rl">' +
-          RONDE.map((it) => {
-            const done = rondeDone(it);
-            const rec = it.auto ? todayAm() && { t: todayAm().time } : S.ronde[it.k];
-            let acts = "";
-            if (!done && !rs.closed) {
-              if (it.auto) acts = '<a class="btn small primary" href="#/eau">Saisir les mesures</a>';
-              else if (it.photo) acts = '<span class="btn small primary camera">' + ic("camera") + 'Photo et valider<input type="file" accept="image/*" capture="environment" data-f="rphoto" data-k="' + it.k + '" aria-label="Prendre une photo"/></span><button class="btn small" type="button" data-act="rex" data-k="' + it.k + '">Photo d’exemple</button>';
-              else acts = '<button class="btn small primary" type="button" data-act="rok" data-k="' + it.k + '">' + ic("check") + "Conforme</button>";
+        const closed = rs.closed;
+        const recOf = (it) => (it.auto ? todayAm() && { t: todayAm().time } : S.ronde[it.k]);
+        const issues = RONDE.filter((it) => S.ronde[it.k] && S.ronde[it.k].issue);
+        const shots = RONDE.filter((it) => S.ronde[it.k] && S.ronde[it.k].photo);
+        const nowStr = pad(Math.floor(demoMin / 60)) + ":" + pad(demoMin % 60);
+        const toOpen = toMin(OUVERTURE) - demoMin;
+        const thumb = (k) => (photos[k] ? '<img alt="" src="' + photos[k] + '"/>' : "");
+
+        const row = (it) => {
+          const rec = recOf(it);
+          const done = !!rec;
+          const iss = rec && rec.issue;
+          let right = "";
+          if (!done && !closed) {
+            if (it.auto) right = '<a class="pbtn txt" href="#/eau">Saisir</a>';
+            else {
+              right =
+                '<button class="pbtn ghost" type="button" data-act="rbad" data-k="' + it.k + '" aria-label="Signaler un problème : ' + esc(it.t) + '">' + ic("alert") + "</button>" +
+                (it.photo
+                  ? '<label class="pbtn cam" aria-label="Photo et valider : ' + esc(it.t) + '">' + ic("camera") + '<input type="file" accept="image/*" capture="environment" data-f="rphoto" data-k="' + it.k + '"/></label>'
+                  : '<button class="pbtn ok" type="button" data-act="rok" data-k="' + it.k + '" aria-label="Conforme : ' + esc(it.t) + '">OK</button>');
             }
-            return '<li class="' + (done ? "done" : "") + '"><div class="row"><span class="ck">' + (done ? ic("check") : "") + "</span><div><b>" + it.t + "</b><small>" + it.s + (it.photo ? " · photo" : "") + "</small>" +
-              (done ? '<div class="stamp">' + (rec.photo ? phImg(it.k) : "") + "Fait à " + rec.t + (it.auto ? " · journal de l’eau" : "") + "</div>" : "") + "</div></div>" +
-              (it.known && isOpenDef(findDef(it.known)) ? '<div class="known">Défaut connu ' + it.known + " : " + findDef(it.known).txt.toLowerCase() + " (vestiaires collectifs)</div>" : "") +
-              (acts ? '<div class="acts">' + acts + "</div>" : "") + "</li>";
-          }).join("") +
-          "</ul>" +
-          (rs.closed ? '<div class="alert good" style="text-align:center"><b>Piscine prête à ouvrir.</b>Ronde complète, enregistrée dans le journal.</div>' : '<button class="btn primary full" style="margin-top:14px" type="button" data-act="rclose"' + (rs.done === rs.total ? "" : " disabled") + ">Clôturer la ronde</button>") +
-          "</div>" +
-          '<p class="muted" style="text-align:center;font-size:13px;margin-top:14px">' + openDaysBefore + " rondes complètes enregistrées depuis le 01.01.2026.</p>" + footer()
+          }
+          const meta = done
+            ? '<span class="stamp' + (iss ? " iss" : "") + '">' + (rec.photo ? thumb(it.k) : "") + (iss ? "Signalé à " + rec.t + " · " + esc(rec.issue) : rec.t + (rec.photo ? " · photo" : "") + (it.auto ? " · journal de l’eau" : "")) + "</span>"
+            : "<small>" + it.s + "</small>" + (it.photo && !closed ? '<button class="exlink" type="button" data-act="rex" data-k="' + it.k + '">Utiliser une photo d’exemple</button>' : "");
+          const known = it.known && isOpenDef(findDef(it.known)) ? '<div class="known">' + ic("alert") + "<span>Défaut connu " + it.known + " : " + findDef(it.known).txt.toLowerCase() + ", vestiaires collectifs.</span></div>" : "";
+          const form =
+            rIssue === it.k
+              ? '<div class="issue"><b>Qu’avez-vous constaté ?</b><div class="chips">' + (ISSUE_HINTS[it.k] || []).map((h) => '<button type="button" class="chip' + (rIssueTxt === h ? " on" : "") + '" data-act="rhint" data-v="' + esc(h) + '">' + h + "</button>").join("") + "</div>" +
+                '<textarea id="rissue" placeholder="Décrire en quelques mots">' + esc(rIssueTxt) + '</textarea><div class="btn-row"><button class="btn small" type="button" data-act="rbadx">Annuler</button><button class="btn small primary" type="button" data-act="rbadsave" data-k="' + it.k + '">Signaler</button></div></div>'
+              : "";
+          return (
+            '<li class="irow' + (done ? (iss ? " is-iss" : " is-done") : "") + '"><span class="cb" aria-hidden="true">' + (done ? (iss ? "!" : ic("check")) : "") + '</span><div class="ib"><b>' + it.t + "</b>" + meta + "</div>" +
+            (right ? '<div class="ir">' + right + "</div>" : "") + known + form + "</li>"
+          );
+        };
+
+        const segs = RONDE.map((it) => { const r = recOf(it); return '<i class="' + (r ? (r.issue ? "iss" : "ok") : "") + '"></i>'; }).join("");
+        const startT = S.ronde.sorties ? S.ronde.sorties.t : "06:44";
+        const head = closed
+          ? '<div class="ph-done"><span class="big-ck">' + ic("check") + "</span><b>Piscine prête à ouvrir</b><small>Ronde clôturée à " + closed.t + " · " + (toMin(closed.t) - toMin(startT)) + " min · " + shots.length + " photos · " + (issues.length ? issues.length + " signalement" + (issues.length > 1 ? "s" : "") : "aucun signalement") + "</small></div>"
+          : '<div class="ph-title"><small>' + cap(JOURS[TODAY.getDay()]) + " " + fmt(TODAY) + "</small><h3>Ronde d’ouverture</h3><span>" + rs.done + " sur " + rs.total + " · ouverture à " + OUVERTURE + "</span></div>";
+
+        const phone =
+          '<div class="phone ios"><div class="sbar"><span>' + nowStr + '</span><span class="sb-r"><i></i><i></i><i></i><u></u></span></div>' +
+          head + '<div class="segs" role="img" aria-label="' + rs.done + " points faits sur " + rs.total + '">' + segs + "</div>" +
+          RGROUPS.map(([g, ks]) => '<div class="grp-t">' + g + '</div><ul class="ilist">' + ks.map((k) => row(RONDE.find((x) => x.k === k))).join("") + "</ul>").join("") +
+          (closed ? "" : '<div class="ph-foot"><button class="btn primary full" type="button" data-act="rclose"' + (rs.done === rs.total ? "" : " disabled") + ">" + (rs.done === rs.total ? "Clôturer la ronde" : "Encore " + (rs.total - rs.done) + " point" + (rs.total - rs.done > 1 ? "s" : "")) + "</button></div>") +
+          '<div class="hbar"></div></div>';
+
+        const hist = rondeHistory();
+        const side =
+          '<div class="rside">' +
+          '<section class="card"><div class="sec-h"><h3>Ce matin</h3><span>vue de la direction</span></div><div class="facts" style="grid-template-columns:1fr 1fr">' +
+          "<div><small>Commencée</small><b>" + startT + " · Julien R.</b></div>" +
+          "<div><small>" + (closed ? "Clôturée" : "Ouverture") + "</small><b>" + (closed ? closed.t : OUVERTURE + (toOpen > 0 ? " · dans " + toOpen + " min" : "")) + "</b></div>" +
+          "<div><small>Photos</small><b>" + shots.length + "</b></div>" +
+          '<div><small>Signalements</small><b class="' + (issues.length ? "v-warn" : "") + '">' + issues.length + "</b></div></div>" +
+          (issues.length ? '<ul class="mini">' + issues.map((it) => "<li><span>" + SHORT[it.k] + " · " + esc(S.ronde[it.k].issue) + "</span><span>" + S.ronde[it.k].t + "</span></li>").join("") + "</ul>" : "") +
+          "</section>" +
+          '<section class="card"><div class="sec-h"><h3>Photos de ce matin</h3><span>' + shots.length + "</span></div>" +
+          (shots.length ? '<div class="pgrid">' + shots.map((it) => "<figure>" + thumb(it.k) + "<figcaption>" + SHORT[it.k] + "<small>" + S.ronde[it.k].t + "</small></figcaption></figure>").join("") + "</div>" : '<p class="muted">Aucune photo pour l’instant.</p>') +
+          "</section>" +
+          '<section class="card"><div class="sec-h"><h3>7 derniers jours</h3><span>' + openDaysBefore + " rondes depuis le 01.01</span></div>" +
+          '<ul class="hist">' + hist.map((h) => "<li><span><b>" + cap(JOURS[h.d.getDay()]).slice(0, 3) + ". " + fmtS(h.d) + "</b><small>" + h.visa + (h.issue ? " · " + h.issue : "") + '</small></span><span class="hr">' + h.start + "–" + h.end + "<small>" + h.dur + ' min</small></span><span class="tag ' + (h.issue ? "t-warn" : "t-good") + '">8/8</span></li>').join("") + "</ul>" +
+          '<p class="note">Un problème signalé pendant la ronde apparaît tout de suite dans « À traiter » pour le responsable technique.</p></section>' +
+          "</div>";
+
+        return (
+          '<div class="page-h ronde-ph"><div><span class="eyebrow">Chaque matin avant ' + OUVERTURE + '</span><h2>Ronde d’ouverture</h2><p>Sur le téléphone du garde-bains : un geste par point, une photo pour les points essentiels, l’heure enregistrée automatiquement.</p></div></div>' +
+          '<div class="ronde-wrap"><div>' + phone + "</div>" + side + "</div>" + footer()
         );
       }
 
@@ -1287,13 +1419,19 @@
       // Heure de la démo : on avance à partir de 06:50, une minute par action.
       let demoMin = 6 * 60 + 50;
       const demoT = () => { demoMin += 2; return pad(Math.floor(demoMin / 60)) + ":" + pad(demoMin % 60); };
+      const SAMPLE = {
+        sorties: '<rect width="120" height="120" fill="#dfe6ec"/><rect x="34" y="18" width="52" height="92" rx="3" fill="#b9c6d2"/><rect x="30" y="8" width="60" height="18" rx="3" fill="#1f8a45"/><path d="M48 17h10M66 17l-5-4M66 17l-5 4" stroke="#fff" stroke-width="2.5" fill="none"/><rect x="40" y="62" width="40" height="5" rx="2" fill="#6b7f92"/>',
+        sauvetage: '<rect width="120" height="120" fill="#d7ecf5"/><rect y="78" width="120" height="42" fill="#7cc4e4"/><circle cx="60" cy="56" r="28" fill="#f26b1d"/><circle cx="60" cy="56" r="13" fill="#d7ecf5"/><path d="M60 28v12M60 72v12M32 56h12M76 56h12" stroke="#fff" stroke-width="7"/>',
+        dae: '<rect width="120" height="120" fill="#e4e8ec"/><rect x="26" y="20" width="68" height="80" rx="10" fill="#1f8a45"/><path d="M60 72s-16-9-16-20a8 8 0 0 1 16-3 8 8 0 0 1 16 3c0 11-16 20-16 20z" fill="#fff"/><path d="M58 50l-4 8h8l-4 8" stroke="#1f8a45" stroke-width="2.5" fill="none"/><circle cx="84" cy="30" r="4" fill="#7dff9b"/>',
+      };
       function sampleImg(k) {
-        const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120"><rect width="120" height="120" fill="#cfdbe6"/><rect x="18" y="60" width="84" height="40" fill="#9fb7cc"/><rect x="44" y="22" width="32" height="42" fill="#7d98b0"/><text x="60" y="114" font-size="11" text-anchor="middle" fill="#3d5468" font-family="Arial">exemple</text></svg>';
+        const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120">' + (SAMPLE[k] || SAMPLE.sorties) + "</svg>";
         photos[k] = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
       }
       sampleImg("sorties"); sampleImg("sauvetage");
 
       document.addEventListener("input", (e) => {
+        if (e.target.id === "rissue") { rIssueTxt = e.target.value; return; }
         const f = e.target.dataset && e.target.dataset.f;
         if (!f || !(f in draft)) return;
         draft[f] = e.target.value;
@@ -1354,6 +1492,14 @@
         }
         else if (a === "rok") { S.ronde[b.dataset.k] = { t: demoT() }; save(); render(); }
         else if (a === "rex") { sampleImg(b.dataset.k); S.ronde[b.dataset.k] = { t: demoT(), photo: "ex" }; save(); render(); }
+        else if (a === "rbad") { rIssue = b.dataset.k; rIssueTxt = ""; render(); const t = document.getElementById("rissue"); if (t) t.focus(); }
+        else if (a === "rhint") { rIssueTxt = b.dataset.v; render(); }
+        else if (a === "rbadx") { rIssue = null; render(); }
+        else if (a === "rbadsave") {
+          const v = ((document.getElementById("rissue") || {}).value || rIssueTxt).trim();
+          if (!v) { toast("Décrivez le problème en quelques mots"); return; }
+          S.ronde[b.dataset.k] = { t: demoT(), issue: v }; rIssue = null; save(); render(); toast("Problème signalé au responsable technique");
+        }
         else if (a === "rclose") { S.rondeClosed = { t: demoT() }; save(); render(); toast("Ronde clôturée"); }
         else if (a === "print") window.print();
         else if (a === "chart") { chartK = b.dataset.k; render(); }
